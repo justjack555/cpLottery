@@ -28,8 +28,23 @@ public class cpLottery{
             groupSize = (int) (8*Math.random()) + 1;
             System.out.println(groupSize);
 
-            otherTracker+= groupSize;
+            int otherID = (int)(100*Math.random()) + 1;
+
+            //Ensure unique ID # for each group
+            while(allGroups.containsKey(otherID)){
+                otherID = (int)(100*Math.random()) + 1;
+            }
+
+            //Add group to Map
+            allGroups.put(otherID, groupSize);
+
+            otherTracker += groupSize;
         }
+
+        System.out.println("The set of group numbers is " + allGroups.keySet());
+        System.out.println("The set of group sizes is " + allGroups.values());
+        System.out.println("The total number of groups is " + allGroups.size());
+
 
 
 
