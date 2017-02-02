@@ -18,8 +18,8 @@ build the lottery program and the groups of other kids outside of your own frien
 are thrown into random group sizes. The first argument when the program is run in my main takes your group size.
 
 Needless to say, the method could be made much more generic to allow you to tinker with different group sizes and
-overall lottery populations. Feel free to pull this down to your local and modify. It can serve as the basic
-groundwork for any similar "lottery prediction" type of problem.
+overall lottery populations. I threw it together in 2 hours because our room was curious. Feel free to pull this down
+to your local and modify. It can serve as the basic groundwork for any similar "lottery prediction" type of problem.
 
 Enjoy!
 JR
