@@ -29,13 +29,13 @@ public class cpLottery{
         while(otherTracker < (TOTPEOPLE - FRIENDSIZE)){
             groupSize = (int) (8*Math.random()) + 1;
             //groupSize = 1;
-            System.out.println(groupSize);
+            //System.out.println(groupSize);
 
             int otherID = (int)(125*Math.random()) + 1;
 
             //Ensure unique ID # for each group
             while(allGroups.containsKey(otherID)){
-                System.out.println(otherID);
+                //System.out.println(otherID);
                 otherID = (int)(125*Math.random()) + 1;
             }
 
@@ -43,7 +43,7 @@ public class cpLottery{
             allGroups.put(otherID, groupSize);
 
             otherTracker += groupSize;
-            System.out.println(otherTracker);
+           // System.out.println(otherTracker);
 
         }
        // TOTPEOPLE = otherTracker + FRIENDSIZE;
