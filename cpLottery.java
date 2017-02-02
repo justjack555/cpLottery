@@ -28,22 +28,25 @@ public class cpLottery{
         //Build map for other groups
         while(otherTracker < (TOTPEOPLE - FRIENDSIZE)){
             groupSize = (int) (8*Math.random()) + 1;
-            //System.out.println(groupSize);
+            //groupSize = 1;
+            System.out.println(groupSize);
 
-            int otherID = (int)(100*Math.random()) + 1;
+            int otherID = (int)(125*Math.random()) + 1;
 
             //Ensure unique ID # for each group
             while(allGroups.containsKey(otherID)){
-                otherID = (int)(100*Math.random()) + 1;
+                System.out.println(otherID);
+                otherID = (int)(125*Math.random()) + 1;
             }
 
             //Add group to Map
             allGroups.put(otherID, groupSize);
 
             otherTracker += groupSize;
+            System.out.println(otherTracker);
 
         }
-        TOTPEOPLE = otherTracker + FRIENDSIZE;
+       // TOTPEOPLE = otherTracker + FRIENDSIZE;
 
         /*
         System.out.println("The set of group numbers is " + allGroups.keySet());
@@ -58,12 +61,12 @@ public class cpLottery{
 
         for(int indivCounter = 0; indivCounter < 12; indivCounter++){
 
-            int friendID = (int)(100*Math.random()) + 1;
+            int friendID = (int)(125*Math.random()) + 1;
 
             //Ensure unique ID # for each group
             while(indivFriends.containsKey(friendID) || allGroups.containsKey(friendID)){
                 //System.out.println(friendID);
-                friendID = (int)(100*Math.random()) + 1;
+                friendID = (int)(125*Math.random()) + 1;
 
             }
 
@@ -94,12 +97,12 @@ public class cpLottery{
 
         for(int groupCounter = 0; groupCounter < numGroups; groupCounter++){
 
-            int friendID = (int)(100*Math.random()) + 1;
+            int friendID = (int)(125*Math.random()) + 1;
 
             //Ensure unique ID # for each group
             while(groupFriends.containsKey(friendID) || allGroups.containsKey(friendID)){
                 //System.out.println(friendID);
-                friendID = (int)(100*Math.random()) + 1;
+                friendID = (int)(125*Math.random()) + 1;
 
             }
 
@@ -152,11 +155,11 @@ public class cpLottery{
             friendsIn = 0;
 
             while (peopleIn < TOTACCEPT) {
-                int selectID = (int) (100 * Math.random()) + 1;
+                int selectID = (int) (125*Math.random()) + 1;
 
                 //Weed out numbers not in either friends or others or numbers already chosen
                 while ((!friends.containsKey(selectID) && !others.containsKey(selectID)) || lottoNums.containsKey(selectID)) {
-                    selectID = (int) (100 * Math.random()) + 1;
+                    selectID = (int) (125*Math.random()) + 1;
                 }
 
                 int currentSize = 0;
