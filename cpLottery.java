@@ -28,14 +28,10 @@ public class cpLottery{
         //Build map for other groups
         while(otherTracker < (TOTPEOPLE - FRIENDSIZE)){
             groupSize = (int) (8*Math.random()) + 1;
-            //groupSize = 1;
-            //System.out.println(groupSize);
-
             int otherID = (int)(125*Math.random()) + 1;
 
             //Ensure unique ID # for each group
             while(allGroups.containsKey(otherID)){
-                //System.out.println(otherID);
                 otherID = (int)(125*Math.random()) + 1;
             }
 
@@ -43,19 +39,15 @@ public class cpLottery{
             allGroups.put(otherID, groupSize);
 
             otherTracker += groupSize;
-           // System.out.println(otherTracker);
 
         }
-       // TOTPEOPLE = otherTracker + FRIENDSIZE;
-
-        /*
-        System.out.println("The set of group numbers is " + allGroups.keySet());
-        System.out.println("The set of group sizes is " + allGroups.values());
-        System.out.println("The total number of groups is " + allGroups.size());
-        */
 
     }
 
+    /**
+     * Parameter-less method to calculate percentage chance of receiving
+     * housing if all 12 friends apply as individuals
+     */
     public void indivStyle(){
         HashMap indivFriends = new HashMap<Integer, Integer>(FRIENDSIZE);
 
@@ -65,20 +57,12 @@ public class cpLottery{
 
             //Ensure unique ID # for each group
             while(indivFriends.containsKey(friendID) || allGroups.containsKey(friendID)){
-                //System.out.println(friendID);
                 friendID = (int)(125*Math.random()) + 1;
-
             }
 
             //Add group to Map
             indivFriends.put(friendID, 1);
         }
-
-        /*
-        System.out.println("The set of indiv numbers is " + indivFriends.keySet());
-        System.out.println("The set of indiv sizes is " + indivFriends.values());
-        System.out.println("The total number of my friends is " + indivFriends.size());
-        */
 
         //Get total number of friends selected
         int acceptedFriends = lottoProcess(indivFriends, allGroups);
@@ -89,9 +73,13 @@ public class cpLottery{
 
     }
 
+    /**
+     * Method to determine percentage chance of individual receiving housing
+     * if he or she applies as part of a group of either 4 or 6
+     * @param myGroupSize
+     */
     public void groupStyle(int myGroupSize){
         int numGroups = FRIENDSIZE/myGroupSize;
-        //System.out.println(numGroups);
 
         HashMap groupFriends = new HashMap<Integer, Integer>(numGroups);
 
@@ -101,20 +89,12 @@ public class cpLottery{
 
             //Ensure unique ID # for each group
             while(groupFriends.containsKey(friendID) || allGroups.containsKey(friendID)){
-                //System.out.println(friendID);
                 friendID = (int)(125*Math.random()) + 1;
-
             }
 
             //Add group to Map
             groupFriends.put(friendID, myGroupSize);
         }
-
-        /*
-        System.out.println("The set of friend group numbers is " + groupFriends.keySet());
-        System.out.println("The set of friend group sizes is " + groupFriends.values());
-        System.out.println("The total number of friend groups is " + groupFriends.size());
-        */
 
         //Get total number of friends selected
         int acceptedFriends = lottoProcess(groupFriends, allGroups);
@@ -126,7 +106,8 @@ public class cpLottery{
 
     /**
      * Method simulates lottery selection process based upon numbers selected
-     * Returns number of friends who get in over the course of all iterations
+     * Returns number of friends who get in over the course of all iterations.
+     * Returns total number of friends who get housing over all simulations
      * @param friends
      * @param others
      */
@@ -134,26 +115,19 @@ public class cpLottery{
         //Map to hold lottery numbers
         HashMap<Integer, Integer> lottoNums = new HashMap<Integer, Integer>();
 
-    /*    System.out.println("The set of indiv numbers is " + friends.keySet());
-        System.out.println("The set of indiv sizes is " + friends.values());
-        System.out.println("The total number of my friends is " + friends.size());
-
-        System.out.println("The set of group numbers is " + others.keySet());
-        System.out.println("The set of group sizes is " + others.values());
-        System.out.println("The total number of groups is " + others.size()); */
-
         int grandTotal = 0;
         int peopleIn = 0;
         int friendsIn = 0;
         int perfectScores = 0;
 
-        //Iterate through selected number of times
+        //Run specified number of lottery simulations
         for(int i = 0; i < ITERATIONS; i++) {
 
             lottoNums.clear();
             peopleIn = 0;
             friendsIn = 0;
 
+            //Make lottery selections until 74 people have received housing
             while (peopleIn < TOTACCEPT) {
                 int selectID = (int) (125*Math.random()) + 1;
 
@@ -163,11 +137,10 @@ public class cpLottery{
                 }
 
                 int currentSize = 0;
-                //Determine which group got number, add group size to totals
+                //Determine which group got number, add group size to totals, ensure number can't be chosen again
                 if (friends.containsKey(selectID)) {
                     currentSize = friends.get(selectID);
                     friendsIn += currentSize;
-                   // System.out.println("The number of friends accepted is now: " + friendsIn);
                     peopleIn += currentSize;
                     lottoNums.put(selectID, currentSize);
                 } else if (others.containsKey(selectID)) {
@@ -175,17 +148,14 @@ public class cpLottery{
                     peopleIn += currentSize;
                     lottoNums.put(selectID, currentSize);
                 }
-
-
-                //System.out.println("Total accepted is " + peopleIn);
             }
 
+            //If all 12 friends get housing, increment perfect round counter
             if(friendsIn == 12){
                 perfectScores++;
             }
 
             grandTotal += friendsIn;
-           // System.out.println("Grand total of friends accepted is " + grandTotal);
         }
 
         System.out.println("The number of perfect rounds out of " + ITERATIONS + " is " + perfectScores);
@@ -198,6 +168,7 @@ public class cpLottery{
         int allPeople = 125;
         int acceptedPeople = 74;
         int friends = 12;
+
         char groupSize = args[0].charAt(0);
         int groupSizeInt = (int)(groupSize) - 48;
         System.out.println("The input group size is " + groupSizeInt);
